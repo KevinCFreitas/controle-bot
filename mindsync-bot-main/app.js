@@ -11,27 +11,17 @@ let qrCodeDataURL = '';
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        headless: true,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
-            '--no-first-run',
-            '--no-zygote',
-            '--single-process',
-            '--disable-gpu'
-        ]
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
 });
 
 client.on('qr', async qr => {
     qrCodeDataURL = await QRCode.toDataURL(qr);
-    console.log('🔄 QR Code atualizado. Acesse /qr para escanear.');
+    console.log('QR Code atualizado. Acesse /qr para escanear.');
 });
 
 client.on('ready', () => {
-    console.log('✅ WhatsApp conectado com sucesso!');
+    console.log('WhatsApp conectado com sucesso!');
 });
 
 client.on('message', async msg => {
@@ -45,9 +35,9 @@ client.on('message', async msg => {
 
     if (['oi', 'olá', 'ola', 'menu', 'começar', 'inicio'].some(w => lower.includes(w))) {
         await sendTyping();
-        await msg.reply(`👋 Olá! Seja bem-vindo(a) à *MindSync* 🧠✨
+        await msg.reply(`Olá! Seja bem-vindo(a) à MindSync
 
-Aqui, conectamos você ao cuidado psicológico com empatia, acolhimento e preço acessível. 💙
+Aqui, conectamos você ao cuidado psicológico com empatia, acolhimento e preço acessível.
 
 Antes de continuarmos, me diz uma coisa:
 Você está aqui como:
@@ -56,14 +46,12 @@ Você está aqui como:
 2️⃣ Psicólogo(a)`);
     } else if (lower.includes('1')) {
         await sendTyping();
-        await msg.reply(`🧠 Clique no link abaixo para preencher o formulário de paciente e agendar sua sessão:
-
-📋 https://docs.google.com/forms/d/e/1FAIpQLSeNIEnswqelGUbLkZgmW3dwVU1X_2jtJhlN6Es5_bNtb5gV5A/viewform?usp=sf_link`);
+        await msg.reply(`Formulário de paciente:
+Acesse: https://forms.gle/hEt3uNHX2ay7j9qd8`);
     } else if (lower.includes('2')) {
         await sendTyping();
-        await msg.reply(`📄 Ótimo! Se você é psicólogo(a), acesse o link abaixo para se cadastrar na plataforma:
-
-📋 https://docs.google.com/forms/d/e/1FAIpQLSf-GDQCe-0UzPPNAzCb3-uZUOdTCULh1pHku_743Ss4AA37GQ/viewform?usp=sf_link`);
+        await msg.reply(`Cadastro para psicólogos:
+Acesse: https://forms.gle/CgChZmvAm2aTeDEv7`);
     }
 });
 
@@ -75,6 +63,5 @@ app.get('/qr', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🌐 Servidor web ouvindo na porta ${PORT}. Acesse /qr para ver o QR Code.`);
+    console.log(`Servidor web ouvindo na porta ${PORT}. Acesse /qr para ver o QR Code.`);
 });
-
