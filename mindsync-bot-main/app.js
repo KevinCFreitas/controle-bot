@@ -48,11 +48,11 @@ Você está aqui como:
         await sendTyping();
         await msg.reply(`🧠 Formulário para Pacientes:
 Por favor, preencha seus dados aqui:
-👉 https://forms.gle/hEt3uNHX2ay7j9qd8`);
+👉 https://forms.gle/mbm7BDJaimYRdoYY9`);
     } else if (lower.includes('2')) {
         await sendTyping();
         await msg.reply(`📋 Cadastro para Psicólogos:
 Preencha o formulário com seus dados profissionais:
-👉 https://forms.gle/CgChZmvAm2aTeDEv7`);
+👉 https://forms.gle/TUGDncyKaux8zneM7`);
     }
 });
