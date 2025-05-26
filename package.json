@@ -1,0 +1,18 @@
+{
+  "name": "controle-bot",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+
+ "dependencies": {
+  "whatsapp-web.js": "^1.23.0",
+  "qrcode": "^1.5.1",
+  "express": "^4.18.2",
+  "puppeteer": "^19.11.1"
+},
+"engines": {
+  "node": "18.x"
+}
+}
