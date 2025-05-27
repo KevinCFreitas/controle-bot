@@ -33,7 +33,7 @@ client.on('message', async msg => {
         await delay(1500);
     };
 
-    if (['Boa tarde','Bom dia','Boa noite','oi', 'olá', 'ola', 'menu', 'começar', 'inicio'].some(w => lower.includes(w))) {
+    if (['boa tarde','bom dia','boa noite','Bom dia','Boa noite','Boa tarde','oi', 'olá', 'ola', 'menu', 'começar', 'inicio'].some(w => lower.includes(w))) {
         await sendTyping();
         await msg.reply(`👋 Olá! Seja bem-vindo(a) à *MindSync* 🧠✨
 
