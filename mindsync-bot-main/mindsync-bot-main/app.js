@@ -33,7 +33,7 @@ client.on('message', async msg => {
         await delay(1500);
     };
 
-    if (['Boa tarde','Bom dia','Boa noite','oi', 'olá', 'ola', 'menu', 'começar', 'inicio'].some(w => lower.includes(w))) {
+    if (['oi', 'olá', 'ola', 'menu', 'começar', 'inicio'].some(w => lower.includes(w))) {
         await sendTyping();
         await msg.reply(`👋 Olá! Seja bem-vindo(a) à *MindSync* 🧠✨
 
@@ -44,24 +44,15 @@ Você está aqui como:
 
 1️⃣ Paciente
 2️⃣ Psicólogo(a)`);
-
     } else if (lower.includes('1')) {
         await sendTyping();
-        await msg.reply(`Perfeito! 💙
-Pra gente te atender da melhor forma, só precisamos que você preencha esse formulário com algumas informações básicas:
-
-📄https://forms.gle/WkTUb4GG6GLbA5HJ7
-
-Depois de preencher, nossa equipe entrará em contato com você pelo WhatsApp para te apresentar os horários disponíveis e tirar dúvidas, beleza?
-
-⚠ Caso tenha qualquer dúvida durante o processo, é só digitar *"ajuda"* aqui mesmo.`);
-
+        await msg.reply(`🧠 Formulário para Pacientes:
+Por favor, preencha seus dados aqui:
+👉 https://forms.gle/mbm7BDJaimYRdoYY9`);
     } else if (lower.includes('2')) {
         await sendTyping();
-        await msg.reply(`📋 Maravilha! 👩‍⚕👨‍⚕Se você deseja fazer parte da equipe da MindSync, precisamos que preencha esse formulário com seus dados e documentos:
-👉 https://forms.gle/ea9ZxwVjqqiqGPhZ9
-Assim que recebermos suas informações, entraremos em contato com os próximos passos. 🧾💬
-
-⚠ Em caso de dúvidas, é só digitar *"ajuda"* aqui no chat.`);
+        await msg.reply(`📋 Cadastro para Psicólogos:
+Preencha o formulário com seus dados profissionais:
+👉 https://forms.gle/TUGDncyKaux8zneM7`);
     }
 });
