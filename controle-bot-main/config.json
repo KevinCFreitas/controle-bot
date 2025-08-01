@@ -1,0 +1,9 @@
+{
+  "mensagensRespostas": {
+    "bom dia": "Bom dia! Como posso te ajudar?",
+    "boa tarde": "Boa tarde! Precisa de alguma informação?",
+    "boa noite": "Boa noite! Estou aqui pra te ajudar.",
+    "como funciona": "Funciona assim: você agenda e eu envio o lembrete 2h antes.",
+    "quero agendar": "Claro! Envie os dados no formato: nome, data e hora."
+  }
+}
