@@ -1,12 +1,10 @@
-
-import { Client, LocalAuth } from 'whatsapp-web.js';
-import qrcode from 'qrcode-terminal';
-import pkg from 'pg';
-import dotenv from 'dotenv';
-import cron from 'node-cron';
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal');
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
+const cron = require('node-cron');
 
 dotenv.config();
-const { Pool } = pkg;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -86,13 +84,11 @@ cron.schedule('* * * * *', async () => {
 
     for (const consulta of rows) {
       const contato = consulta.telefone.replace(/\D/g, '') + '@c.us';
-      const texto = `📅 Olá ${consulta.nome}, lembrete: sua consulta está agendada para hoje às ${consulta.datahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`;
+      const texto = `📅 Olá ${consulta.nome}, lembrete: sua consulta está agendada para hoje às ${new Date(consulta.datahora).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`;
       await client.sendMessage(contato, texto);
-      console.log(`✅ Lembrete enviado para ${consulta.nome}`);
+      console.log(`Lembrete enviado para ${consulta.nome} (${consulta.telefone})`);
     }
-  } catch (e) {
-    console.error('Erro ao verificar lembretes:', e);
+  } catch (err) {
+    console.error('Erro ao enviar lembretes:', err);
   }
 });
-
-client.initialize();
