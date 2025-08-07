@@ -28,11 +28,12 @@ client.on('message', async (message) => {
   const numero = message.from;
   const content = message.body.toLowerCase();
 
+  // Envia mensagem de boas-vindas e formulário só no primeiro contato
   if (!usuariosAtendidos.has(numero)) {
     usuariosAtendidos.add(numero);
 
     await message.reply(
-      `Olá! Seja bem-vindo(a) ao atendimento da clínica.
+`👋 Olá! Seja bem-vindo(a) ao atendimento da clínica.
 
 Você pode agendar sua consulta diretamente por aqui digitando:
 
@@ -47,9 +48,9 @@ Você pode agendar sua consulta diretamente por aqui digitando:
 
   const hora = new Date().getHours();
   if (['oi', 'olá', 'bom dia', 'boa tarde', 'boa noite'].some(p => content.includes(p))) {
-    if (hora < 12) return message.reply('Bom dia! Como posso ajudar?');
-    if (hora < 18) return message.reply('Boa tarde! Precisa de ajuda com seu agendamento?');
-    return message.reply('Boa noite! Fico à disposição para agendarmos sua consulta.');
+    if (hora < 12) return message.reply('🌅 Bom dia! Como posso ajudar?');
+    if (hora < 18) return message.reply('☀️ Boa tarde! Precisa de ajuda com seu agendamento?');
+    return message.reply('🌙 Boa noite! Fico à disposição para agendarmos sua consulta.');
   }
 
   if (content.startsWith('agendar')) {
@@ -70,6 +71,7 @@ Você pode agendar sua consulta diretamente por aqui digitando:
   }
 });
 
+// Lembrete automático 2h antes da consulta
 cron.schedule('* * * * *', async () => {
   const agora = new Date();
   const daqui2h = new Date(agora.getTime() + 2 * 60 * 60 * 1000);
@@ -86,9 +88,11 @@ cron.schedule('* * * * *', async () => {
       const contato = consulta.telefone.replace(/\D/g, '') + '@c.us';
       const texto = `📅 Olá ${consulta.nome}, lembrete: sua consulta está agendada para hoje às ${new Date(consulta.datahora).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`;
       await client.sendMessage(contato, texto);
-      console.log(`Lembrete enviado para ${consulta.nome} (${consulta.telefone})`);
+      console.log(`✅ Lembrete enviado para ${consulta.nome}`);
     }
   } catch (err) {
     console.error('Erro ao enviar lembretes:', err);
   }
 });
+
+client.initialize();
