@@ -18,7 +18,18 @@ const client = new Client({
 
 const usuariosAtendidos = new Set();
 
-client.on('qr', (qr) => qrcode.generate(qr, { small: true }));
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const qrcode = require('qrcode');
+
+client.on('qr', async (qr) => {
+  try {
+    const qrImage = await qrcode.toDataURL(qr); // Converte o QR em base64
+    console.log(qrImage); // Railway vai exibir como imagem automaticamente
+  } catch (err) {
+    console.error('Erro ao gerar QR Code:', err);
+  }
+});
+
 
 client.on('ready', () => {
   console.log('🤖 Bot está pronto!');
@@ -96,3 +107,8 @@ cron.schedule('* * * * *', async () => {
 });
 
 client.initialize();
+client.on('disconnected', (reason) => {
+  console.log('🤖 Bot desconectado:', reason);
+  usuariosAtendidos.clear(); // Limpa o set de usuários atendidos
+  client.initialize(); // Re-inicializa o cliente
+});
